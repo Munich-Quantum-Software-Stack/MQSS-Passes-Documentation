@@ -222,18 +222,8 @@ $(function(){initNavTree('md_docs_2cudaq-transpiler.html',''); initResizable(tru
 <div class="line"><span class="comment">// if pass is applied successfully ...</span></div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Circuit after pass:\n&quot;</span>;</div>
 <div class="line">mlirModule-&gt;dump();</div>
-</div><!-- fragment --><p>The following circuit will be used as a test case. Each following sections shows the transpiled circuit obtained for <b>IQM, AQT, PlanQ and WMI</b> backends.</p>
-<div align="center"> <img src="Input.png" alt="Input" width="75%" class="inline"/> </div><h1>AQT</h1>
-<p>The AQT backend supports the following gates: <code>"x", "y", "z", "h", "s", "t", "rx", "ry", "rz", "x(1)", "z(1)", "swap"</code>.</p>
-<div class="image">
-<img src="AQTTranspilation.png" alt=""/>
-<div class="caption">
-AQT</div></div>
-    <h1>WMI</h1>
-<p>The WMI backend supports the following gates: <code>"rx", "ry", "rz", "h", "phased_rx", "phased_ry", "phased_rz", "x(1)", "z(1)"</code>.</p>
-<div align="center"> <img src="WMITranspilation.png" alt="WMI" width="100%" class="inline"/> </div><h1>PlanQ</h1>
-<p>The WMI backend supports the following gates: <code>"rx", "ry", "rz", "x(1)", "z(1)"</code>.</p>
-<h1>IQM</h1>
+</div><!-- fragment --><p>The following circuit will be used as a test case. The following section shows the transpiled circuit for <b>IQM</b>.</p>
+<div align="center"> <img src="Input.png" alt="Input" width="75%" class="inline"/> </div>                     <h1>IQM</h1>
 <p>The IQM backend supports the following gates: <code>"phased_rx","z(1)"</code>. For the sake of clarity, just fragments of the transpiled circuit are shown.</p>
 <h2>1)</h2>
 <div align="center"> <img src="Transpiled-IQM1.png" alt="Fragment 1" width="100%" class="inline"/> </div><h2>2)</h2>
