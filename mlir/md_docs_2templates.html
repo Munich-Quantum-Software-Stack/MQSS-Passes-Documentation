@@ -223,10 +223,15 @@ $(function(){initNavTree('md_docs_2templates.html',''); initResizable(true); });
 <div class="textblock"><p>The following sections describe how expand this collection of MLIR passes by defining custom passes.</p>
 <h1><a class="anchor" id="pass-definition"></a>
 Registering a new pass</h1>
-<p>To define a new pass you have to register it into the <code>include/Passes.hpp</code> file. Let say, you want to include a custom pass called <code>CustomExamplePass</code>. The method to create the pass must be registered as follows:</p>
-<div class="fragment"><div class="line">std::unique_ptr&lt;mlir::Pass&gt; createCustomExamplePass();</div>
+<p>Into the MQSS, the passes are classified as <em>transforms</em>, <em>decompositions</em> and <em>code generation</em> passes. To define a new pass you have to register it into the <code>include/Transforms.hpp</code>, <code>include/Decompositions.hpp</code> or <code>include/CodeGen.hpp</code> files, respectively.</p>
+<p>Let say, you want to include a custom pass called <code>CustomExamplePass</code> as part of the decompositions collection. The method to create the pass must be registered in the file <code>include/Decompositions.hpp</code> as follows:</p>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>mqss::opt {</div>
+<div class="line">  std::unique_ptr&lt;mlir::Pass&gt; createCustomExamplePass();</div>
+<div class="line">}</div>
 </div><!-- fragment --><p>If the pass requires arguments, those have to be also declared into the signature of the method that creates the pass. For instance, we declare a <code>CustomExampleArgumentPass</code> that receives the argument <code>int value</code>.</p>
-<div class="fragment"><div class="line">std::unique_ptr&lt;mlir::Pass&gt; createCustomExampleArgumentPass(<span class="keywordtype">int</span> value);</div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>mqss::opt {</div>
+<div class="line">  std::unique_ptr&lt;mlir::Pass&gt; createCustomExampleArgumentPass(<span class="keywordtype">int</span> value);</div>
+<div class="line">}</div>
 </div><!-- fragment --><p>Notice that the pass has to be declared into <code>namespace mqss::opt</code> to be integrated as part of the MQSS.</p>
 <h1><a class="anchor" id="pass-new"></a>
 Writing a new pass</h1>
@@ -283,19 +288,18 @@ Writing a new pass</h1>
 <div class="line">  <span class="keywordflow">return</span> std::make_unique&lt;CustomExamplePassPlugin&gt;();</div>
 <div class="line">}</div>
 <div class="ttc" id="aExamples_8hpp_html_ab2213ddb661771e1a424fd0e21b310c5"><div class="ttname"><a href="Examples_8hpp.html#ab2213ddb661771e1a424fd0e21b310c5">mqss::opt::createCustomExamplePass</a></div><div class="ttdeci">std::unique_ptr&lt; mlir::Pass &gt; createCustomExamplePass()</div><div class="ttdoc">Example custom MLIR pass.</div></div>
-</div><!-- fragment --><p>In order to be integrated into this project, the file <code>CustomExamplePass.cpp</code> must be in the <code>src</code> directory of this repository.</p>
+</div><!-- fragment --><p>In order to be integrated into this project, the file <code>CustomExamplePass.cpp</code> must be in the <code>lib/Passes/Decompositions</code>, <code>lib/Passes/Transforms</code> or <code>lib/Passes/CodeGen</code> directory of this repository.</p>
 <h1><a class="anchor" id="pass-build"></a>
 Building your pass</h1>
 <p>After including your pass in the project, you can build it as follows:</p>
-<div class="fragment"><div class="line">cd build</div>
-<div class="line">cmake ..</div>
-<div class="line">make</div>
+<div class="fragment"><div class="line">bash build.sh --mlir-dir &quot;dir-to-mlir&quot; --clang-dir &quot;dir-to-clang&quot;</div>
+<div class="line">              --llvm-dir &quot;dir-to-llvm&quot;</div>
 </div><!-- fragment --><h1><a class="anchor" id="pass-use"></a>
 Using your new pass</h1>
-<p>Once your pass is integrated into this project. You can use it to transform any given QUAKE MLIR module. Assuming that your MLIR module is into a string named <code>quakeModule</code>. First, you need to get the context and the module itself as follows:</p>
+<p>Once your pass is integrated into this project. You can use it to transform any given MLIR/Quake module. Assuming that your MLIR module is into a string named <code>quakeModule</code>. First, you need to get the context and the module itself as follows:</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> [mlirModule, contextPtr] = extractMLIRContext(quakeModule);</div>
 <div class="line">mlir::MLIRContext &amp;context = *contextPtr;</div>
-</div><!-- fragment --><p>Apart of getting context and module, the function <code>extractMLIRContext</code> register the dialects to be used, in our case QUAKE dialect too. This tells to MLIR to recognize operations and functions belonging to QUAKE dialect.</p>
+</div><!-- fragment --><p>Apart of getting context and module, the function <code>extractMLIRContext</code> register the dialects to be used, in our case Quake dialect too. This tells to MLIR to recognize operations and functions belonging to Quake dialect.</p>
 <p>Next, you have to declare a pass manager <code>mlir::PassManager</code> and load your custom pass <code><a class="el" href="Examples_8hpp.html#ab2213ddb661771e1a424fd0e21b310c5" title="Example custom MLIR pass.">mqss::opt::createCustomExamplePass</a></code> as follows:</p>
 <div class="fragment"><div class="line"><span class="comment">// creating pass manager</span></div>
 <div class="line">mlir::PassManager pm(&amp;context);</div>

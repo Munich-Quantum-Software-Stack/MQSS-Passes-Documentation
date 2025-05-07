@@ -204,66 +204,85 @@ $(function(){initNavTree('Quake_8hpp_source.html',''); initResizable(true); });
   <div class="headertitle"><div class="title">Quake.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SUPPORT_QUAKE_H</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SUPPORT_QUAKE_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;cudaq/Optimizer/Dialect/Quake/QuakeDialect.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;cudaq/Optimizer/Dialect/Quake/QuakeOps.h&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;cudaq/Support/Plugin.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;mlir/Dialect/SCF/IR/SCF.h&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;mlir/Rewrite/FrozenRewritePatternSet.h&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;mlir/Transforms/DialectConversion.h&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;llvm/Support/Casting.h&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;llvm/Support/raw_ostream.h&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">using namespace </span>mlir;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span>mqss::support::quakeDialect {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// Given a OpBuilder and a double value, it inserts a double in the mlir</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// module pointer by the OpBuilder and returns the inserted Value</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>Value createFloatValue(OpBuilder &amp;builder, Location loc, <span class="keywordtype">double</span> value);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// TODO: return -1 is not good idea</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// Given an argument value as Operation, it extracts a double, it the operation</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// is not double, returns -1.0 when fail</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">double</span> extractDoubleArgumentValue(Operation *op);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">// TODO: return -1 is not good idea</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">// Given an ExtractRefOp, it extracts the integer of the index pointing that</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">// reference (qubit index), returns -1 when fail</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>int64_t extractIndexFromQuakeExtractRefOp(Operation *op);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// function to get the number of qubits in a given quantum kernel</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">int</span> getNumberOfQubits(func::FuncOp circuit);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// Function to get the number of classical bits allocated in a given</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// quantum kernel, it also stores information of the qiubit position</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">int</span> getNumberOfClassicalBits(func::FuncOp circuit,</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                             std::map&lt;int, int&gt; &amp;measurements);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// Function to get the number of classical bits allocated in</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// a given quantum kernel</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keywordtype">int</span> getNumberOfClassicalBits(func::FuncOp circuit);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// Function that get the indices of the Value objectes in array</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>std::vector&lt;int&gt; getIndicesOfValueRange(mlir::ValueRange array);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">// At the moment, it is assumed that the parameters are of type Double</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>std::vector&lt;double&gt; getParametersValues(mlir::ValueRange array);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">// Get the previous operation on a given TargeQubit, starting from</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">// currentOp</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>mlir::Operation *getPreviousOperationOnTarget(mlir::Operation *currentOp,</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                                              mlir::Value targetQubit);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">// Get the next operation on a given TargeQubit, starting from</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">// currentOp</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>mlir::Operation *getNextOperationOnTarget(mlir::Operation *currentOp,</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                                          mlir::Value targetQubit);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>} <span class="comment">// namespace mqss::support::quakeDialect</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">namespace </span>supportQuake = mqss::support::quakeDialect;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#endif </span><span class="comment">// SUPPORT_QUAKE_H</span></div>
+<a href="Quake_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* This code and any associated documentation is provided &quot;as is&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"></span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">Copyright 2025 Munich Quantum Software Stack Project</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">Licensed under the Apache License, Version 2.0 with LLVM Exceptions (the</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">&quot;License&quot;); you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">You may obtain a copy of the License at</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"></span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">https://github.com/Munich-Quantum-Software-Stack/passes/blob/develop/LICENSE</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"></span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">License for the specific language governing permissions and limitations under</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">the License.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">********************************************************************************</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">  author Martin Letras</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  date   May 2025</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  version 1.0</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">********************************************************************************/</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &quot;cudaq/Optimizer/Dialect/Quake/QuakeDialect.h&quot;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &quot;cudaq/Optimizer/Dialect/Quake/QuakeOps.h&quot;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &quot;cudaq/Support/Plugin.h&quot;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &quot;mlir/Dialect/SCF/IR/SCF.h&quot;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#include &quot;mlir/Rewrite/FrozenRewritePatternSet.h&quot;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#include &quot;mlir/Transforms/DialectConversion.h&quot;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;llvm/Support/Casting.h&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#include &quot;llvm/Support/raw_ostream.h&quot;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">using namespace </span>mlir;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">namespace </span>mqss::support::quakeDialect {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="Quake_8hpp.html#ade264f09bf85e500bcde07ab9577b314">   60</a></span>Value <a class="code hl_function" href="Quake_8hpp.html#ade264f09bf85e500bcde07ab9577b314">createFloatValue</a>(OpBuilder &amp;builder, Location loc, <span class="keywordtype">double</span> value);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">// TODO: return -1 is not good idea</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="Quake_8hpp.html#a4e5b5368156dbd67826e01a3155bb8b4">   70</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="Quake_8hpp.html#a4e5b5368156dbd67826e01a3155bb8b4">extractDoubleArgumentValue</a>(Operation *op);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">// TODO: return -1 is not good idea</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="Quake_8hpp.html#adf4ca4f53ccbc2c29cc1a8f1064e254b">   79</a></span>int64_t <a class="code hl_function" href="Quake_8hpp.html#adf4ca4f53ccbc2c29cc1a8f1064e254b">extractIndexFromQuakeExtractRefOp</a>(Operation *op);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="Quake_8hpp.html#af9183ac15905853676804e877ff2be6a">   89</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="Quake_8hpp.html#af9183ac15905853676804e877ff2be6a">getNumberOfQubits</a>(func::FuncOp circuit);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="Quake_8hpp.html#a49906f05f96081b78c3510df7f7ff60d">  103</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="Quake_8hpp.html#a49906f05f96081b78c3510df7f7ff60d">getNumberOfClassicalBits</a>(func::FuncOp circuit,</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                             std::map&lt;int, int&gt; &amp;measurements);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="Quake_8hpp.html#a2c72da3b352cb3810b1cb419f7a67704">  115</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="Quake_8hpp.html#a49906f05f96081b78c3510df7f7ff60d">getNumberOfClassicalBits</a>(func::FuncOp circuit);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="Quake_8hpp.html#abd23acd261b1e96d5af69fc137034111">  125</a></span>std::vector&lt;int&gt; <a class="code hl_function" href="Quake_8hpp.html#abd23acd261b1e96d5af69fc137034111">getIndicesOfValueRange</a>(mlir::ValueRange array);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="Quake_8hpp.html#a2205e3930ce57b23c7d12b331841952f">  136</a></span>std::vector&lt;double&gt; <a class="code hl_function" href="Quake_8hpp.html#a2205e3930ce57b23c7d12b331841952f">getParametersValues</a>(mlir::ValueRange array);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="Quake_8hpp.html#a60d9c5bed435cea18e4d99fd81acb9f8">  147</a></span>mlir::Operation *<a class="code hl_function" href="Quake_8hpp.html#a60d9c5bed435cea18e4d99fd81acb9f8">getPreviousOperationOnTarget</a>(mlir::Operation *currentOp,</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                                              mlir::Value targetQubit);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="Quake_8hpp.html#a577f01687aad8fdbec8f3929c50acc0e">  159</a></span>mlir::Operation *<a class="code hl_function" href="Quake_8hpp.html#a577f01687aad8fdbec8f3929c50acc0e">getNextOperationOnTarget</a>(mlir::Operation *currentOp,</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                                          mlir::Value targetQubit);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>} <span class="comment">// namespace mqss::support::quakeDialect</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="keyword">namespace </span>supportQuake = mqss::support::quakeDialect;</div>
+<div class="ttc" id="aQuake_8hpp_html_a2205e3930ce57b23c7d12b331841952f"><div class="ttname"><a href="Quake_8hpp.html#a2205e3930ce57b23c7d12b331841952f">mqss::support::quakeDialect::getParametersValues</a></div><div class="ttdeci">std::vector&lt; double &gt; getParametersValues(mlir::ValueRange array)</div><div class="ttdoc">Function that get a vector of numerical values associated with a given mlir::ValueRange.</div></div>
+<div class="ttc" id="aQuake_8hpp_html_a49906f05f96081b78c3510df7f7ff60d"><div class="ttname"><a href="Quake_8hpp.html#a49906f05f96081b78c3510df7f7ff60d">mqss::support::quakeDialect::getNumberOfClassicalBits</a></div><div class="ttdeci">int getNumberOfClassicalBits(func::FuncOp circuit, std::map&lt; int, int &gt; &amp;measurements)</div><div class="ttdoc">Function that get the number of classical bits used by a given quantum kernel.</div></div>
+<div class="ttc" id="aQuake_8hpp_html_a4e5b5368156dbd67826e01a3155bb8b4"><div class="ttname"><a href="Quake_8hpp.html#a4e5b5368156dbd67826e01a3155bb8b4">mqss::support::quakeDialect::extractDoubleArgumentValue</a></div><div class="ttdeci">double extractDoubleArgumentValue(Operation *op)</div><div class="ttdoc">Function that extracts a double numeric value from a numeric value in an MLIR module.</div></div>
+<div class="ttc" id="aQuake_8hpp_html_a577f01687aad8fdbec8f3929c50acc0e"><div class="ttname"><a href="Quake_8hpp.html#a577f01687aad8fdbec8f3929c50acc0e">mqss::support::quakeDialect::getNextOperationOnTarget</a></div><div class="ttdeci">mlir::Operation * getNextOperationOnTarget(mlir::Operation *currentOp, mlir::Value targetQubit)</div><div class="ttdoc">Function get the next operation on a given target qubit.</div></div>
+<div class="ttc" id="aQuake_8hpp_html_a60d9c5bed435cea18e4d99fd81acb9f8"><div class="ttname"><a href="Quake_8hpp.html#a60d9c5bed435cea18e4d99fd81acb9f8">mqss::support::quakeDialect::getPreviousOperationOnTarget</a></div><div class="ttdeci">mlir::Operation * getPreviousOperationOnTarget(mlir::Operation *currentOp, mlir::Value targetQubit)</div><div class="ttdoc">Function get the previous operation on a given target qubit.</div></div>
+<div class="ttc" id="aQuake_8hpp_html_abd23acd261b1e96d5af69fc137034111"><div class="ttname"><a href="Quake_8hpp.html#abd23acd261b1e96d5af69fc137034111">mqss::support::quakeDialect::getIndicesOfValueRange</a></div><div class="ttdeci">std::vector&lt; int &gt; getIndicesOfValueRange(mlir::ValueRange array)</div><div class="ttdoc">Function that get a vector of indices associated with a given mlir::ValueRange.</div></div>
+<div class="ttc" id="aQuake_8hpp_html_ade264f09bf85e500bcde07ab9577b314"><div class="ttname"><a href="Quake_8hpp.html#ade264f09bf85e500bcde07ab9577b314">mqss::support::quakeDialect::createFloatValue</a></div><div class="ttdeci">Value createFloatValue(OpBuilder &amp;builder, Location loc, double value)</div><div class="ttdoc">Function that creates an mlir::Value associated to a numeric value.</div></div>
+<div class="ttc" id="aQuake_8hpp_html_adf4ca4f53ccbc2c29cc1a8f1064e254b"><div class="ttname"><a href="Quake_8hpp.html#adf4ca4f53ccbc2c29cc1a8f1064e254b">mqss::support::quakeDialect::extractIndexFromQuakeExtractRefOp</a></div><div class="ttdeci">int64_t extractIndexFromQuakeExtractRefOp(Operation *op)</div><div class="ttdoc">Function that extracts an index of a given ExtractRefOp operation.</div></div>
+<div class="ttc" id="aQuake_8hpp_html_af9183ac15905853676804e877ff2be6a"><div class="ttname"><a href="Quake_8hpp.html#af9183ac15905853676804e877ff2be6a">mqss::support::quakeDialect::getNumberOfQubits</a></div><div class="ttdeci">int getNumberOfQubits(func::FuncOp circuit)</div><div class="ttdoc">Function that get the number of qubits used by a given quantum kernel.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_081c14bac5072591c2093ecb32283714.html">Support</a></li><li class="navelem"><a class="el" href="dir_4a5c082897b0bfd4345c3588e8dd699f.html">CodeGen</a></li><li class="navelem"><b>Quake.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_081c14bac5072591c2093ecb32283714.html">Support</a></li><li class="navelem"><a class="el" href="dir_4a5c082897b0bfd4345c3588e8dd699f.html">CodeGen</a></li><li class="navelem"><a class="el" href="Quake_8hpp.html">Quake.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>

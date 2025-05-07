@@ -212,7 +212,7 @@ $(function(){initNavTree('md_docs_2guide.html',''); initResizable(true); });
 <div class="fragment"><div class="line">bash scripts/install_toolchain.sh -t clang16</div>
 </div><!-- fragment --><p>Then, you can install LLVM/MLIR and the prerequisites required by CudaQ by running:</p>
 <div class="fragment"><div class="line">LLVM_PROJECTS=&quot;clang;lld;mlir;python-bindings;compiler-rt&quot;  bash scripts/install_prerequisites.sh</div>
-</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>Do not forget to include <code>compiler-rt</code> in the <code>LLVM_PROJECTS</code>. This is required by some of the MQSS MLIR passes. If you do not include it, compilation will not work.</dd></dl>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>Do not forget to include <code>compiler-rt</code> in the <code>LLVM_PROJECTS</code>. This is required by some of the MQSS MLIR passes. If you do not include it, the project will not compile.</dd></dl>
 <h1>Initial Setup</h1>
 <ol type="1">
 <li>Fork the Passes repository on GitHub (see <a href="https://github.com/Munich-Quantum-Software-Stack/passes">https://github.com/Munich-Quantum-Software-Stack/passes</a>).</li>
@@ -236,16 +236,16 @@ $(function(){initNavTree('md_docs_2guide.html',''); initResizable(true); });
 <p>The previous steps creates an isolated environment where you can tests this project. The project is located:</p>
 <div class="fragment"><div class="line">cd /workspaces/passes</div>
 </div><!-- fragment --><h1>Working on Source Code</h1>
-<p>Building the project requires a C compiler supporting <em>C11</em> and a minimum CMake version of <em>3.19</em>. The example devices and the tests require a C++ compiler supporting <em>C++17</em> and <em>C++20</em> dialects.</p>
+<p>Building the project requires a C++ compiler supporting <em>C11</em> and a minimum CMake version of <em>3.19</em>. The example devices and the tests require a C++ compiler supporting <em>C++17</em> and <em>C++20</em> dialects.</p>
 <h2>Configure and Build</h2>
-<p>This collection of MLIR passes uses CMake as its build system. However, we provide an script <code>build.sh</code> that first builds CudaQ library <code>cudaq-mlir-runtime</code>. Then, the script builds the MQSS passes project. You, can configure and build the project as follows:</p>
+<p>This collection of MLIR passes uses CMake as its build system. However, we provide an script <code>build.sh</code> that first builds CudaQ library <code>cudaq-mlir-runtime</code>. Then, the script builds the MQSS passes project. You can configure and build the project as follows:</p>
 <div class="fragment"><div class="line">bash build.sh --jobs 5 --debug --mlir-dir &quot;dir-to-mlir&quot; --clang-dir &quot;dir-to-clang&quot;</div>
 <div class="line">              --llvm-dir &quot;dir-to-llvm&quot; --build-tests --build-docs --build-tools</div>
 </div><!-- fragment --><p>In the following, we describe each of the arguments accepted by <code>build.sh</code>.</p>
 <ul>
-<li><code>--jobs</code> (<b>optional</b>) The number of jobs utilized to configure and compile the project. If not specified, one job is used.</li>
+<li><code>--jobs</code> (<b>optional</b>) The number of jobs utilized to configure and compile the project. If not specified, a single job is used to compile the project.</li>
 <li><code>--debug</code> (<b>optional</b>) Used to show debug information. If you want to build the project without debug information, do not include it.</li>
-<li><code>--mlir-dir</code> Path of your MLIR installation.</li>
+<li><code>--mlir-dir</code> Path of your MLIR installation. E.g., <code>/opt/llvm/lib/cmake/mlir/</code></li>
 <li><code>--clang-dir</code> Path of your Clang installation.</li>
 <li><code>--llvm-dir</code> Path of your LLVM installation.</li>
 <li><code>--build-tests</code> (<b>optional</b>) Include it if you want to build the tests of this project.</li>
@@ -253,7 +253,7 @@ $(function(){initNavTree('md_docs_2guide.html',''); initResizable(true); });
 <li><code>--build-tools</code> (<b>optional</b>) Include it if you want to build additional tools.</li>
 </ul>
 <h2>Running Tests</h2>
-<p>We use the <a href="https://google.github.io/googletest/primer.html">GoogleTest</a> framework for unit testing each MLIR in this collection. All tests are contained in the <code>test</code> directory. You can configure and build the project using CMake as follows:</p>
+<p>We use the <a href="https://google.github.io/googletest/primer.html">GoogleTest</a> framework for unit testing each MLIR pass in this collection. All tests are contained in the <code>test</code> directory. You can configure and build the project using CMake as follows:</p>
 <div class="fragment"><div class="line">bash build.sh --build-tests</div>
 </div><!-- fragment --><p>The executables used to run the tests can be found at <code>build/tests/</code>. To verify all the available tests, run:</p>
 <div class="fragment"><div class="line">ctest --test-dir build --output-on-failure</div>

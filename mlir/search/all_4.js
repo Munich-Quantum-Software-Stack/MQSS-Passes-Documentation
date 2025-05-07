@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['examples_2ehpp_0',['Examples.hpp',['../Examples_8hpp.html',1,'']]]
+  ['evaluateexpression_0',['evaluateExpression',['../QASMToQuake_8hpp.html#a6524eb00572fab9ca9db4fcad4399c65',1,'mqss::interfaces']]],
+  ['examples_2ehpp_1',['Examples.hpp',['../Examples_8hpp.html',1,'']]],
+  ['extractdoubleargumentvalue_2',['extractDoubleArgumentValue',['../Quake_8hpp.html#a4e5b5368156dbd67826e01a3155bb8b4',1,'mqss::support::quakeDialect']]],
+  ['extractindexfromquakeextractrefop_3',['extractIndexFromQuakeExtractRefOp',['../Quake_8hpp.html#adf4ca4f53ccbc2c29cc1a8f1064e254b',1,'mqss::support::quakeDialect']]]
 ];

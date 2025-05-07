@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['pass_0',['pass',['../md_docs_2templates.html#pass-build',1,'Building your pass'],['../md_docs_2templates.html#pass-definition',1,'Registering a new pass'],['../md_docs_2templates.html#pass-use',1,'Using your new pass'],['../md_docs_2templates.html#pass-new',1,'Writing a new pass']]],
-  ['passes_20for_20the_20mqss_1',['Writing Passes for the MQSS',['../md_docs_2templates.html',1,'']]],
-  ['passes_20of_20the_20mqss_2',['Collection of Passes of the MQSS',['../index.html',1,'']]],
-  ['patterns_3',['CudaQ Decomposition Patterns',['../md_docs_2cudaq-decompositions.html',1,'']]]
+  ['o1_0',['O1',['../Pipelines_8hpp.html#a5d0c2da48df82b18b59f958d7e280bef',1,'mqss::opt']]],
+  ['o2_1',['O2',['../Pipelines_8hpp.html#ac3a7a0b0e0377cfcb5f47883ec1b1654',1,'mqss::opt']]],
+  ['o3_2',['O3',['../Pipelines_8hpp.html#a7c92e07c31c2429a255a95c6c9d22930',1,'mqss::opt']]],
+  ['of_20passes_20of_20the_20mqss_3',['Collection of Passes of the MQSS',['../index.html',1,'']]],
+  ['of_20the_20mqss_4',['Collection of Passes of the MQSS',['../index.html',1,'']]]
 ];

@@ -215,7 +215,7 @@ $(function(){initNavTree('md_docs_2cudaq-transpiler.html',''); initResizable(tru
 <div class="line">options.basis = {<span class="stringliteral">&quot;h&quot;</span>,  <span class="stringliteral">&quot;s&quot;</span>, <span class="stringliteral">&quot;t&quot;</span>, <span class="stringliteral">&quot;rx&quot;</span>, <span class="stringliteral">&quot;ry&quot;</span>, <span class="stringliteral">&quot;rz&quot;</span>, <span class="stringliteral">&quot;x&quot;</span>, <span class="stringliteral">&quot;y&quot;</span>, <span class="stringliteral">&quot;z&quot;</span>, <span class="stringliteral">&quot;x(1)&quot;</span>};</div>
 </div><!-- fragment --><p>Next, add a <code>cudaq::opt::createBasisConversionPass</code> to the pass manager. Do not forget to pass <code>options</code> as input parameter of <code>cudaq::opt::createDecompositionPass</code>, as follows:</p>
 <div class="fragment"><div class="line">pm.addPass(createBasisConversionPass(options));</div>
-</div><!-- fragment --><p>Finally, you can dump and visualize the effects of the decomposition pattern on your MLIR module as follows:</p>
+</div><!-- fragment --><p>Finally, you can dump and visualize the effects of running the transpiler on your MLIR module as follows:</p>
 <div class="fragment"><div class="line"><span class="comment">// running the pass</span></div>
 <div class="line"><span class="keywordflow">if</span>(mlir::failed(pm.run(mlirModule)))</div>
 <div class="line">  std::runtime_error(<span class="stringliteral">&quot;The pass failed...&quot;</span>);</div>

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['your_20new_20pass_0',['Using your new pass',['../md_docs_2templates.html#pass-use',1,'']]],
-  ['your_20pass_1',['Building your pass',['../md_docs_2templates.html#pass-build',1,'']]]
+  ['the_20mqss_0',['the MQSS',['../index.html',1,'Collection of Passes of the MQSS'],['../md_docs_2templates.html',1,'Writing Passes for the MQSS']]],
+  ['transforms_2ehpp_1',['Transforms.hpp',['../Transforms_8hpp.html',1,'']]],
+  ['transpiler_2',['CudaQ Transpiler',['../md_docs_2cudaq-transpiler.html',1,'']]]
 ];

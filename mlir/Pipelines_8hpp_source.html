@@ -204,26 +204,49 @@ $(function(){initNavTree('Pipelines_8hpp_source.html',''); initResizable(true); 
   <div class="headertitle"><div class="title">Pipelines.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;mlir/Conversion/MathToFuncs/MathToFuncs.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;mlir/Dialect/Func/IR/FuncOps.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;mlir/Pass/PassManager.h&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;mlir/Transforms/Passes.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span>mqss::opt {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">void</span> O1(mlir::PassManager &amp;pm);</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keywordtype">void</span> O2(mlir::PassManager &amp;pm);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">void</span> O3(mlir::PassManager &amp;pm);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>} <span class="comment">// namespace mqss::opt</span></div>
+<a href="Pipelines_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* This code and any associated documentation is provided &quot;as is&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"></span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">Copyright 2025 Munich Quantum Software Stack Project</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">Licensed under the Apache License, Version 2.0 with LLVM Exceptions (the</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">&quot;License&quot;); you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">You may obtain a copy of the License at</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"></span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">https://github.com/Munich-Quantum-Software-Stack/passes/blob/develop/LICENSE</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"></span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">License for the specific language governing permissions and limitations under</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">the License.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">*****************************************************************************</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">  author Martin Letras</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  date   April 2025</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  version 1.0</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">****************************************************************************/</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &quot;mlir/Conversion/MathToFuncs/MathToFuncs.h&quot;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &quot;mlir/Dialect/Func/IR/FuncOps.h&quot;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#include &quot;mlir/Pass/PassManager.h&quot;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#include &quot;mlir/Transforms/Passes.h&quot;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">namespace </span>mqss::opt {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="Pipelines_8hpp.html#a5d0c2da48df82b18b59f958d7e280bef">   51</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="Pipelines_8hpp.html#a5d0c2da48df82b18b59f958d7e280bef">O1</a>(mlir::PassManager &amp;pm);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="Pipelines_8hpp.html#ac3a7a0b0e0377cfcb5f47883ec1b1654">   59</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="Pipelines_8hpp.html#ac3a7a0b0e0377cfcb5f47883ec1b1654">O2</a>(mlir::PassManager &amp;pm);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="Pipelines_8hpp.html#a7c92e07c31c2429a255a95c6c9d22930">   67</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="Pipelines_8hpp.html#a7c92e07c31c2429a255a95c6c9d22930">O3</a>(mlir::PassManager &amp;pm);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>} <span class="comment">// namespace mqss::opt</span></div>
+<div class="ttc" id="aPipelines_8hpp_html_a5d0c2da48df82b18b59f958d7e280bef"><div class="ttname"><a href="Pipelines_8hpp.html#a5d0c2da48df82b18b59f958d7e280bef">mqss::opt::O1</a></div><div class="ttdeci">void O1(mlir::PassManager &amp;pm)</div><div class="ttdoc">Function defining the optimization level O1.</div></div>
+<div class="ttc" id="aPipelines_8hpp_html_a7c92e07c31c2429a255a95c6c9d22930"><div class="ttname"><a href="Pipelines_8hpp.html#a7c92e07c31c2429a255a95c6c9d22930">mqss::opt::O3</a></div><div class="ttdeci">void O3(mlir::PassManager &amp;pm)</div><div class="ttdoc">Function defining the optimization level O3.</div></div>
+<div class="ttc" id="aPipelines_8hpp_html_ac3a7a0b0e0377cfcb5f47883ec1b1654"><div class="ttname"><a href="Pipelines_8hpp.html#ac3a7a0b0e0377cfcb5f47883ec1b1654">mqss::opt::O2</a></div><div class="ttdeci">void O2(mlir::PassManager &amp;pm)</div><div class="ttdoc">Function defining the optimization level O2.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_51922257438199cb68a5e72d7349044c.html">Optimizer</a></li><li class="navelem"><b>Pipelines.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_51922257438199cb68a5e72d7349044c.html">Optimizer</a></li><li class="navelem"><a class="el" href="Pipelines_8hpp.html">Pipelines.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>

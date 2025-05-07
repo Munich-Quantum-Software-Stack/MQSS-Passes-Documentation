@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['of_20passes_20of_20the_20mqss_0',['Collection of Passes of the MQSS',['../index.html',1,'']]],
-  ['of_20the_20mqss_1',['Collection of Passes of the MQSS',['../index.html',1,'']]]
+  ['new_20pass_0',['new pass',['../md_docs_2templates.html#pass-definition',1,'Registering a new pass'],['../md_docs_2templates.html#pass-use',1,'Using your new pass'],['../md_docs_2templates.html#pass-new',1,'Writing a new pass']]]
 ];
