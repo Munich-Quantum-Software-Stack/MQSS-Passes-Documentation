@@ -223,8 +223,8 @@ $(function(){initNavTree('md_docs_2templates.html',''); initResizable(true); });
 <div class="textblock"><p>The following sections describe how expand this collection of MLIR passes by defining custom passes.</p>
 <h1><a class="anchor" id="pass-definition"></a>
 Registering a new pass</h1>
-<p>Into the MQSS, the passes are classified as <em>transforms</em>, <em>decompositions</em> and <em>code generation</em> passes. To define a new pass you have to register it into the <code>include/Transforms.hpp</code>, <code>include/Decompositions.hpp</code> or <code>include/CodeGen.hpp</code> files, respectively.</p>
-<p>Let say, you want to include a custom pass called <code>CustomExamplePass</code> as part of the decompositions collection. The method to create the pass must be registered in the file <code>include/Decompositions.hpp</code> as follows:</p>
+<p>Into the MQSS, the passes are classified as <em>transforms</em>, <em>decompositions</em> and <em>code generation</em> passes. To define a new pass you have to register it into the <code><a class="el" href="Transforms_8hpp.html">include/Passes/Transforms.hpp</a></code>, <code><a class="el" href="Decompositions_8hpp.html">include/Passes/Decompositions.hpp</a></code> or <code><a class="el" href="CodeGen_8hpp.html">include/Passes/CodeGen.hpp</a></code> files, respectively.</p>
+<p>Let say, you want to include a custom pass called <code>CustomExamplePass</code> as part of the decompositions collection. The method to create the pass must be registered in the file <code><a class="el" href="Decompositions_8hpp.html">include/Passes/Decompositions.hpp</a></code> as follows:</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>mqss::opt {</div>
 <div class="line">  std::unique_ptr&lt;mlir::Pass&gt; createCustomExamplePass();</div>
 <div class="line">}</div>
